@@ -1,0 +1,1132 @@
+openapi: "3.0.1"
+info:
+  title: "sps-dev-api-nxt-hierarchy-parameters"
+  description: "API responsable de la gestión de los parámetros de nodos a nivel jerarquí\
+    a."
+  version: "1.0.0"
+servers:
+  - url: "https://api.dev.stg.smartpayment.com.mx/{basePath}"
+    variables:
+      basePath:
+        default: "hierarchy-params"
+paths:
+  /api/v1/hierarchy/parameters/enable:
+    put:
+      operationId: "disableParameter"
+      parameters:
+        - name: "Accept-Language"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParameterDTO"
+        required: true
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDTO"
+        "400":
+          description: "400 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDTO"
+        "401":
+          description: "401 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDTO"
+        "500":
+          description: "500 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDTO"
+        "403":
+          description: "403 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDTO"
+      security:
+        - sps-dev-authorizer-nxt-hierarchy-parameters: []
+      x-amazon-apigateway-request-validator: "Validate body, query string parameters,\
+        \ and headers"
+      x-amazon-apigateway-integration:
+        connectionId: "11khwr"
+        httpMethod: "PUT"
+        uri: "https://priv-alb-nxt1.dev.stg.smartpayment.com.mx:10014/api/v1/hierarchy/parameters/enable"
+        responses:
+          "4\\d{2}":
+            statusCode: "400"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          "5\\d{2}":
+            statusCode: "500"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.header.Accept-Language: "method.request.header.Accept-Language"
+          integration.request.header.Authorization: "method.request.header.Authorization"
+        connectionType: "VPC_LINK"
+        passthroughBehavior: "when_no_templates"
+        type: "http"
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content: {}
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,PUT'"
+              method.response.header.Access-Control-Allow-Headers: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /actuator/health:
+    get:
+      responses:
+        "200":
+          description: "200 response"
+          content: {}
+      x-amazon-apigateway-integration:
+        connectionId: "11khwr"
+        httpMethod: "GET"
+        uri: "https://priv-alb-nxt1.dev.stg.smartpayment.com.mx:10014/actuator/health"
+        responses:
+          default:
+            statusCode: "200"
+        connectionType: "VPC_LINK"
+        passthroughBehavior: "when_no_match"
+        type: "http"
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content: {}
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /api/v1/hierarchy/parameters/template:
+    get:
+      operationId: "getTemplate"
+      parameters:
+        - name: "Accept-Language"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "parameter"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "id"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDTO"
+        "400":
+          description: "400 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDTO"
+        "401":
+          description: "401 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDTO"
+        "500":
+          description: "500 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDTO"
+        "403":
+          description: "403 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDTO"
+      security:
+        - sps-dev-authorizer-nxt-hierarchy-parameters: []
+      x-amazon-apigateway-request-validator: "Validate body, query string parameters,\
+        \ and headers"
+      x-amazon-apigateway-integration:
+        connectionId: "11khwr"
+        httpMethod: "GET"
+        uri: "https://priv-alb-nxt1.dev.stg.smartpayment.com.mx:10014/api/v1/hierarchy/parameters/template"
+        responses:
+          "4\\d{2}":
+            statusCode: "400"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          "5\\d{2}":
+            statusCode: "500"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.querystring.parameter: "method.request.querystring.parameter"
+          integration.request.querystring.id: "method.request.querystring.id"
+          integration.request.header.Accept-Language: "method.request.header.Accept-Language"
+          integration.request.header.Authorization: "method.request.header.Authorization"
+        connectionType: "VPC_LINK"
+        passthroughBehavior: "when_no_templates"
+        type: "http"
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content: {}
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /api/v1/hierarchy/parameters/catalog:
+    get:
+      operationId: "getCatalog"
+      parameters:
+        - name: "Accept-Language"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "id"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDTO"
+        "400":
+          description: "400 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDTO"
+        "401":
+          description: "401 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDTO"
+        "500":
+          description: "500 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDTO"
+        "403":
+          description: "403 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDTO"
+      security:
+        - sps-dev-authorizer-nxt-hierarchy-parameters: []
+      x-amazon-apigateway-request-validator: "Validate body, query string parameters,\
+        \ and headers"
+      x-amazon-apigateway-integration:
+        connectionId: "11khwr"
+        httpMethod: "GET"
+        uri: "https://priv-alb-nxt1.dev.stg.smartpayment.com.mx:10014/api/v1/hierarchy/parameters/catalog"
+        responses:
+          "4\\d{2}":
+            statusCode: "400"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          "5\\d{2}":
+            statusCode: "401"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.querystring.id: "method.request.querystring.id"
+          integration.request.header.Accept-Language: "method.request.header.Accept-Language"
+          integration.request.header.Authorization: "method.request.header.Authorization"
+        connectionType: "VPC_LINK"
+        passthroughBehavior: "when_no_templates"
+        type: "http"
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content: {}
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /api/v1/hierarchy/parameters/spread:
+    put:
+      operationId: "spreadParameter"
+      parameters:
+        - name: "Accept-Language"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseParameterDTO"
+        required: true
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "400":
+          description: "400 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "401":
+          description: "401 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "500":
+          description: "500 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "403":
+          description: "403 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+      security:
+        - sps-dev-authorizer-nxt-hierarchy-parameters: []
+      x-amazon-apigateway-request-validator: "Validate body, query string parameters,\
+        \ and headers"
+      x-amazon-apigateway-integration:
+        connectionId: "11khwr"
+        httpMethod: "PUT"
+        uri: "https://priv-alb-nxt1.dev.stg.smartpayment.com.mx:10014/api/v1/hierarchy/parameters/spread"
+        responses:
+          "4\\d{2}":
+            statusCode: "400"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          "5\\d{2}":
+            statusCode: "500"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.header.Accept-Language: "method.request.header.Accept-Language"
+          integration.request.header.Authorization: "method.request.header.Authorization"
+        connectionType: "VPC_LINK"
+        passthroughBehavior: "when_no_templates"
+        type: "http"
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content: {}
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,PUT'"
+              method.response.header.Access-Control-Allow-Headers: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /api/v1/hierarchy/parameters:
+    get:
+      operationId: "getParameters"
+      parameters:
+        - name: "Authorization"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "Accept-Language"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "page"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "parameter"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "id"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "size"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "property"
+          in: "query"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "400":
+          description: "400 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "401":
+          description: "401 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "500":
+          description: "500 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "403":
+          description: "403 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+      security:
+        - sps-dev-authorizer-nxt-hierarchy-parameters: []
+      x-amazon-apigateway-request-validator: "Validate body, query string parameters,\
+        \ and headers"
+      x-amazon-apigateway-integration:
+        connectionId: "11khwr"
+        httpMethod: "GET"
+        uri: "https://priv-alb-nxt1.dev.stg.smartpayment.com.mx:10014/api/v1/hierarchy/parameters"
+        responses:
+          "4\\d{2}":
+            statusCode: "400"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          "5\\d{2}":
+            statusCode: "500"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.querystring.parameter: "method.request.querystring.parameter"
+          integration.request.querystring.page: "method.request.querystring.page"
+          integration.request.querystring.id: "method.request.querystring.id"
+          integration.request.header.Accept-Language: "method.request.header.Accept-Language"
+          integration.request.header.Authorization: "method.request.header.Authorization"
+          integration.request.querystring.size: "method.request.querystring.size"
+          integration.request.querystring.property: "method.request.querystring.property"
+        connectionType: "VPC_LINK"
+        passthroughBehavior: "when_no_templates"
+        type: "http"
+    put:
+      parameters:
+        - name: "Accept-Language"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseParameterDTO"
+        required: true
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "400":
+          description: "400 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "401":
+          description: "401 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "500":
+          description: "500 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "403":
+          description: "403 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+      security:
+        - sps-dev-authorizer-nxt-hierarchy-parameters: []
+      x-amazon-apigateway-request-validator: "Validate body, query string parameters,\
+        \ and headers"
+      x-amazon-apigateway-integration:
+        connectionId: "11khwr"
+        httpMethod: "PUT"
+        uri: "https://priv-alb-nxt1.dev.stg.smartpayment.com.mx:10014/api/v1/hierarchy/parameters"
+        responses:
+          "4\\d{2}":
+            statusCode: "400"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          "5\\d{2}":
+            statusCode: "500"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.header.Accept-Language: "method.request.header.Accept-Language"
+          integration.request.header.Authorization: "method.request.header.Authorization"
+        connectionType: "VPC_LINK"
+        passthroughBehavior: "when_no_templates"
+        type: "http"
+    post:
+      operationId: "createParameter"
+      parameters:
+        - name: "Accept-Language"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseParameterDTO"
+        required: true
+      responses:
+        "201":
+          description: "201 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "400":
+          description: "400 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "401":
+          description: "401 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "500":
+          description: "500 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "403":
+          description: "403 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+      security:
+        - sps-dev-authorizer-nxt-hierarchy-parameters: []
+      x-amazon-apigateway-request-validator: "Validate body, query string parameters,\
+        \ and headers"
+      x-amazon-apigateway-integration:
+        connectionId: "11khwr"
+        httpMethod: "POST"
+        uri: "https://priv-alb-nxt1.dev.stg.smartpayment.com.mx:10014/api/v1/hierarchy/parameters"
+        responses:
+          "4\\d{2}":
+            statusCode: "400"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          default:
+            statusCode: "200"
+          "201":
+            statusCode: "201"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          "5\\d{2}":
+            statusCode: "500"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.header.Accept-Language: "method.request.header.Accept-Language"
+          integration.request.header.Authorization: "method.request.header.Authorization"
+        connectionType: "VPC_LINK"
+        passthroughBehavior: "when_no_templates"
+        type: "http"
+    delete:
+      operationId: "deleteParameter"
+      parameters:
+        - name: "Accept-Language"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "Authorization"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseParameterDTO"
+        required: true
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "400":
+          description: "400 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "401":
+          description: "401 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "500":
+          description: "500 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+        "403":
+          description: "403 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseDataParameterDTO"
+      security:
+        - sps-dev-authorizer-nxt-hierarchy-parameters: []
+      x-amazon-apigateway-request-validator: "Validate body, query string parameters,\
+        \ and headers"
+      x-amazon-apigateway-integration:
+        connectionId: "11khwr"
+        httpMethod: "DELETE"
+        uri: "https://priv-alb-nxt1.dev.stg.smartpayment.com.mx:10014/api/v1/hierarchy/parameters"
+        responses:
+          "4\\d{2}":
+            statusCode: "400"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+          "5\\d{2}":
+            statusCode: "500"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestParameters:
+          integration.request.header.Accept-Language: "method.request.header.Accept-Language"
+          integration.request.header.Authorization: "method.request.header.Authorization"
+        connectionType: "VPC_LINK"
+        passthroughBehavior: "when_no_templates"
+        type: "http"
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content: {}
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'DELETE,GET,OPTIONS,POST,PUT'"
+              method.response.header.Access-Control-Allow-Headers: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+components:
+  schemas:
+    ResponseCodeDTO:
+      type: "object"
+      properties:
+        code:
+          type: "string"
+        message:
+          type: "string"
+        htmlMessage:
+          type: "string"
+        solution:
+          type: "string"
+        category:
+          type: "string"
+    ResponseDTO:
+      type: "object"
+      properties:
+        type:
+          type: "string"
+        list:
+          type: "array"
+          items:
+            type: "object"
+        responseCode:
+          $ref: "#/components/schemas/ResponseCodeDTO"
+        class:
+          type: "object"
+    ResponseParameterDTO:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        status:
+          type: "integer"
+          format: "int32"
+        idSystem:
+          type: "integer"
+          format: "int32"
+        idProperty:
+          type: "integer"
+          format: "int32"
+        idHierarchy:
+          type: "integer"
+          format: "int32"
+        idParameters:
+          type: "integer"
+          format: "int32"
+        AMOUNT:
+          type: "string"
+        LABEL_PARAMETER:
+          type: "string"
+        AMOUNT_MIN:
+          type: "string"
+        AMOUNT_MAX:
+          type: "string"
+        delete:
+          type: "integer"
+          format: "int32"
+        spread:
+          type: "integer"
+          format: "int32"
+        TYPE:
+          type: "string"
+    ResponseDataParameterDTO:
+      type: "object"
+      properties:
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ResponseParameterDTO"
+        page:
+          type: "integer"
+          format: "int32"
+        size:
+          type: "integer"
+          format: "int32"
+        totalPages:
+          type: "integer"
+          format: "int32"
+        totalElements:
+          type: "integer"
+          format: "int32"
+        responseCode:
+          $ref: "#/components/schemas/ResponseCodeDTO"
+    ParameterDTO:
+      type: "object"
+      properties:
+        idSystem:
+          type: "integer"
+          format: "int32"
+        idParameter:
+          type: "integer"
+          format: "int32"
+        idProperty:
+          type: "integer"
+          format: "int32"
+        idHierarchy:
+          type: "integer"
+          format: "int32"
+        name:
+          type: "string"
+        description:
+          type: "string"
+        nameEN:
+          type: "string"
+        status:
+          type: "integer"
+          format: "int32"
+        maxElements:
+          type: "integer"
+          format: "int32"
+  securitySchemes:
+    sps-dev-authorizer-nxt-hierarchy-parameters:
+      type: "apiKey"
+      name: "Authorization"
+      in: "header"
+      x-amazon-apigateway-authtype: "cognito_user_pools"
+      x-amazon-apigateway-authorizer:
+        providerARNs:
+          - "arn:aws:cognito-idp:us-east-1:329599659357:userpool/us-east-1_PnFOcVZSs"
+        type: "cognito_user_pools"
+x-amazon-apigateway-gateway-responses:
+  DEFAULT_4XX:
+    responseParameters:
+      gatewayresponse.header.Access-Control-Allow-Methods: "'DELETE,GET,OPTIONS,POST,PUT'"
+      gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+  DEFAULT_5XX:
+    responseParameters:
+      gatewayresponse.header.Access-Control-Allow-Methods: "'DELETE,GET,OPTIONS,POST,PUT'"
+      gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+x-amazon-apigateway-request-validators:
+  Validate body, query string parameters, and headers:
+    validateRequestParameters: true
+    validateRequestBody: true

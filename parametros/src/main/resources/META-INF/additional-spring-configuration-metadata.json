@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "secret.name",
+      "type": "java.lang.String",
+      "description": "Database secret name'"
+    }
+  ]
+}
